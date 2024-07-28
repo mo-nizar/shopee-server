@@ -1,14 +1,14 @@
 import express, { Request, Response } from "express";
-import productModel from "../models/products.model.js";
 import UserController from '../controllers/UserController';
+import OrdersController from "../controllers/OrderController.js";
 
 const router = express.Router();
 
 
 // register routes
-router.post("/register", async function (req: Request, res: Response) {
+router.post("/view", async function (req: Request, res: Response) {
   try {
-    const data = await UserController().signup(req.body);
+    const data = await OrdersController().fetchAll();
     res.status(200).json(data);
   } catch (error) {
     console.error("🚀 ~ error:", error);
@@ -16,9 +16,19 @@ router.post("/register", async function (req: Request, res: Response) {
   }
 });
 
-router.post("/login", async function (req: Request, res: Response) {
+router.post("/create", async function (req: Request, res: Response) {
   try {
-    const data = await UserController().login(req.body);
+    const data = await OrdersController().fetchAll();
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("🚀 ~ error:", error);
+    res.status(500).json({ status: 500, error: "Internal Server Error" });
+  }
+});
+
+router.post("/update", async function (req: Request, res: Response) {
+  try {
+    const data = await OrdersController().fetchAll();
     res.status(200).json(data);
   } catch (error) {
     console.error("🚀 ~ error:", error);
